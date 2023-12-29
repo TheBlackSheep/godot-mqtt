@@ -7,7 +7,7 @@ func _ready():
 
 func _on_brokerprotocol_item_selected(index):
 	# port defaults for [tcp, ssl, ws, wss] used at https://test.mosquitto.org/
-	$VBox/HBoxBroker/brokerport.text = "%d" % ([ 1883, 8886, 8080, 8081 ][index])
+	$VBox/HBoxBroker/brokerport.text = "%d" % ([ 1883, 8883, 8080, 8081 ][index])
 
 func _on_button_connect_toggled(button_pressed):
 	if button_pressed:
@@ -24,7 +24,11 @@ func _on_button_connect_toggled(button_pressed):
 		$VBox/HBoxBrokerControl/status.text = "connecting..."
 		var brokerurl = $VBox/HBoxBroker/brokeraddress.text
 		var protocol = $VBox/HBoxBroker/brokerprotocol.get_item_text($VBox/HBoxBroker/brokerprotocol.selected)
-		$MQTT.connect_to_broker("%s%s:%s" % [protocol, brokerurl, $VBox/HBoxBroker/brokerport.text])
+		var brokerport = $VBox/HBoxBroker/brokerport.text
+		var username = $VBox/HBoxUserDetails/edUsername.text
+		var password = $VBox/HBoxUserDetails/edPassword.text
+		
+		$MQTT.connect_to_broker("%s%s:%s" % [protocol, brokerurl, brokerport],username, password)
 
 	else:
 		$VBox/HBoxBrokerControl/status.text = "disconnecting..."

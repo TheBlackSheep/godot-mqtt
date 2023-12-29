@@ -79,7 +79,6 @@ text = "URL: "
 [node name="brokeraddress" type="LineEdit" parent="VBox/HBoxBroker"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "test.mosquitto.org"
 
 [node name="Label2" type="Label" parent="VBox/HBoxBroker"]
 layout_mode = 2
@@ -107,6 +106,30 @@ popup/item_2/text = "ws://"
 popup/item_2/id = 2
 popup/item_3/text = "wss://"
 popup/item_3/id = 3
+
+[node name="HBoxUserDetails" type="HBoxContainer" parent="VBox"]
+clip_contents = true
+layout_mode = 2
+
+[node name="lblUsername" type="Label" parent="VBox/HBoxUserDetails"]
+layout_mode = 2
+text = "Username: "
+
+[node name="edUsername" type="LineEdit" parent="VBox/HBoxUserDetails"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_length = 32
+expand_to_text_length = true
+
+[node name="lblPassword" type="Label" parent="VBox/HBoxUserDetails"]
+layout_mode = 2
+text = "Password: "
+
+[node name="edPassword" type="LineEdit" parent="VBox/HBoxUserDetails"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_length = 32
+secret = true
 
 [node name="HSeparator" type="HSeparator" parent="VBox"]
 custom_minimum_size = Vector2(0, 10)

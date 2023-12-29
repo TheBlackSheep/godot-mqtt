@@ -31,7 +31,7 @@ var brokerconnectmode = BCM_NOCONNECTION
 var regexbrokerurl = RegEx.new()
 
 const DEFAULTBROKERPORT_TCP = 1883
-const DEFAULTBROKERPORT_SSL = 8886
+const DEFAULTBROKERPORT_SSL = 8883
 const DEFAULTBROKERPORT_WS = 8080
 const DEFAULTBROKERPORT_WSS = 8081
 
@@ -251,8 +251,13 @@ func cleanupsockets(retval=false):
 	brokerconnectmode = BCM_NOCONNECTION
 	return retval
 
-func connect_to_broker(brokerurl):
+func connect_to_broker(brokerurl,brokerusername,brokerpassword):
 	assert (brokerconnectmode == BCM_NOCONNECTION)
+	#assume you can;t have a pswword without a username
+	if brokerusername != "":
+		self.user = brokerusername
+		if brokerpassword != "":
+			self.pswd = brokerpassword
 	var brokermatch = regexbrokerurl.search(brokerurl)
 	if brokermatch == null:
 		print("ERROR: unrecognized brokerurl pattern:", brokerurl)
@@ -266,7 +271,7 @@ func connect_to_broker(brokerurl):
 	if brokercomponents[3]:
 		brokerport = int(brokercomponents[3].substr(1)) 
 	var brokerpath = brokercomponents[4] if brokercomponents[4] else ""
-	
+		
 	common_name = null	
 	if iswebsocket:
 		websocket = WebSocketPeer.new()
