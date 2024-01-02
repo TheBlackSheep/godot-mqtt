@@ -251,9 +251,9 @@ func cleanupsockets(retval=false):
 	brokerconnectmode = BCM_NOCONNECTION
 	return retval
 
-func connect_to_broker(brokerurl,brokerusername,brokerpassword):
+func connect_to_broker(brokerurl, brokerusername:String="", brokerpassword:String=""):
 	assert (brokerconnectmode == BCM_NOCONNECTION)
-	#assume you can;t have a pswword without a username
+	#assume you can't have a password without a username
 	if brokerusername != "":
 		self.user = brokerusername
 		if brokerpassword != "":
